@@ -34,7 +34,8 @@ def ataque_aventureiro():
             dano = ataque_arco
             print (f"O aventureiro {nome} acerta uma no inimigo e tira {dano} de dano.")
         case _:
-            print("\nOpção Invalida.")     
+            print("\nOpção Invalida.")
+    return dano     
 
 os.system("cls")
 nome = input("Insera o nome do aventureiro: ")
