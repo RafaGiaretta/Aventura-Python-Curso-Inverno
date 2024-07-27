@@ -5,6 +5,36 @@ moedas = 500.0
 ataque = 0.0
 ataque_distancia = 0.0
 defesa = 0.0
+vida_aventureiro = 100.0
+
+def ataque_aventureiro():
+    ataque_espada = random.randint(15,20) + ataque
+    ataque_arco = random.randint(15,20) + ataque_distancia
+    ataque_soco = random.randint(5,10)
+
+    if ataque == 0:
+       print("[1] Atacar no Soco")
+    else:
+        print("[1] Atacar com Espada")
+
+    if ataque_distancia > 0:
+        print("[2] Arco e Flecha")
+
+    escolha = input("Resposta: ")
+
+    match escolha:
+        case '1':
+            if ataque == 0:
+                dano = ataque_soco
+                print (f"O aventureiro {nome} da um soco no inimigo e tira {dano} de dano.")
+            else:
+                dano = ataque_espada 
+                print (f"O aventureiro {nome} da uma espadada no inimigo e tira {dano} de dano.")
+        case '2':
+            dano = ataque_arco
+            print (f"O aventureiro {nome} acerta uma no inimigo e tira {dano} de dano.")
+        case _:
+            print("\nOpção Invalida.")     
 
 os.system("cls")
 nome = input("Insera o nome do aventureiro: ")
@@ -81,7 +111,7 @@ if escolha == '1':
                 case _:
                     print("\nOpção Invalida.")
                     break               
-
+            
             escolha = input("\nDeseja comprar outro item?\n[1] Sim.     [2] Não.\nResposta: ")
             
             if escolha == '1' and moedas == 0:
