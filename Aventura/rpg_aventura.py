@@ -1,183 +1,179 @@
-import random
 import os
 
+# Variáveis globais
+vida_boss = 100
+vida_guerreiro = 100
+usos_magia = 3
+usos_cura = 3
 moedas = 500.0
 ataque = 0.0
 ataque_distancia = 0.0
 defesa = 0.0
-vida_aventureiro = 100.0
-
-def ataque_aventureiro():
-    ataque_espada = random.randint(15,20) + ataque
-    ataque_arco = random.randint(15,20) + ataque_distancia
-    ataque_soco = random.randint(5,10)
-
-    if ataque == 0:
-       print("[1] Atacar no Soco")
-    else:
-        print("[1] Atacar com Espada")
-
-    if ataque_distancia > 0:
-        print("[2] Arco e Flecha")
-
-    escolha = input("Resposta: ")
-
-    match escolha:
-        case '1':
-            if ataque == 0:
-                dano = ataque_soco
-                print (f"O aventureiro {nome} da um soco no inimigo e tira {dano} de dano.")
-            else:
-                dano = ataque_espada 
-                print (f"O aventureiro {nome} da uma espadada no inimigo e tira {dano} de dano.")
-        case '2':
-            dano = ataque_arco
-            print (f"O aventureiro {nome} acerta uma no inimigo e tira {dano} de dano.")
-        case _:
-            print("\nOpção Invalida.")
-    return dano     
+nome = ""
 
 os.system("cls")
-nome = input("Insera o nome do aventureiro: ")
+nome = input("Insira o nome do aventureiro: ")
 os.system("cls")
 
 print(f"O aventureiro {nome} começou sua aventura e se deparou com uma bifurcação.")
+print("O caminho da esquerda leva para um castelo assombrado.")
+print("O caminho da direita leva para um pântano sombrio.")
 
-print("O caminho da esquerda leva o aventureiro para um castelo assombrado.")
-
-print("O caminho da direita leva o aventureiro para um pântano sombrio.")
-
-escolha = input(f"\nPor qual caminho o aventureiro {nome} ira seguir: \n[1] Esquerda (Castelo Assombrado).\n[2] Direita (Pântano Sombrio).\nResposta: ")
-os.system ("cls")
+escolha = input(f"\nPor qual caminho {nome} irá seguir: \n[1] Esquerda\n[2] Direita\nResposta: ")
+os.system("cls")
 
 if escolha == '1':
-    print("Adentrando ao Castelo o aventureiro encontra um homem velho afiando uma espada antiga.")
-    print("-- O velho homem, o que você faz nesse castelo?")
-    print("-- Eu que pergunto, o que você procura neste castelo?")
-    escolha = input("\n[1] -- Estou em busca do meu próprio caminho. \n[2] -- Isso não é da sua conta velho. \nResposta: ")
+    print("Adentrando o Castelo, você encontra um velho afiando uma espada.")
+    print("-- O que você faz neste castelo?")
+    escolha = input("[1] Estou em busca do meu caminho\n[2] Não é da sua conta\nResposta: ")
     os.system("cls")
-
-    if escolha == '1': 
-
-        print("O velho o encara perplexo:\n-- Talvez um de meus itens possa te ajudar nessa jornada, algo lhe interesse. \nDisse o velho apontando na direção de uma armário de carvalho cheio de diversos itens:")
-        
-        while escolha == '1' and moedas > 0:
+    
+    if escolha == '1':
+        while True:
             print("\n------------------------- LOJA -------------------------")
-            print("[1] Espada Grande (10 de Ataque)                 $400.00")
-            print("[2] Espada Pequena (5 de Ataque)                 $300.00")
-            print("[3] Arco e Flecha (5 de Ataque à Distancia)      $100.00")
-            print("[4] Escudo Grande (10 de Defesa)                 $200.00")
-            print("[5] Escudo Pequeno (5 de Defesa)                 $100.00")
-            print("--------------------------------------------------------")
-
-            print(f"\nSuas Moedas: ${moedas}")
-            compra = input("Qual item deseja comprar: ")
-
-            match compra:
-                case '1':
-                    if moedas < 400:
-                        print("\nVocê não possuí moedas o suficiente.")
-                    else:
-                        moedas -= 400
-                        ataque += 10
-                        print(f"\nO aventureiro {nome} comprou uma Espada Grande.")
-                case '2':
-                    if moedas < 300:
-                        print("\nVocê não possuí moedas o suficiente.")
-                    else:
-                        moedas -= 300
-                        ataque += 5
-                        print(f"\nO aventureiro {nome} comprou uma Espada Pequena.")
-                case '3':
-                    if moedas < 100:
-                        print("\nVocê não possuí moedas o suficiente.")
-                    else:
-                        moedas -= 100
-                        ataque_distancia += 5
-                        print(f"\nO aventureiro {nome} comprou um Arco e Flecha.")
-                case '4':
-                    if moedas < 200:
-                        print("\nVocê não possuí moedas o suficiente.")
-                    else:
-                        moedas -= 200
-                        defesa += 10
-                        print(f"\nO aventureiro {nome} comprou um Escudo Grande.")
-                case '5': 
-                    if moedas < 100:
-                        print("\nVocê não possuí moedas o suficiente.")
-                    else:
-                        moedas -= 100
-                        defesa += 5
-                        print(f"\nO aventureiro {nome} comprou um Escudo Pequeno.")
-                case _:
-                    print("\nOpção Invalida.")
-                    break               
+            print("[1] Espada Grande (10 de Ataque) $400")
+            print("[2] Espada Pequena (5 de Ataque) $300")
+            print("[3] Arco (5 de Ataque à Distância) $100")
+            print("[4] Escudo Grande (10 de Defesa) $200")
+            print("[5] Escudo Pequeno (5 de Defesa) $100")
+            print(f"\nMoedas: ${moedas}")
+            compra = input("Escolha um item ou [6] Sair: ")
             
-            escolha = input("\nDeseja comprar outro item?\n[1] Sim.     [2] Não.\nResposta: ")
+            if compra == '1' and moedas >= 400:
+                moedas -= 400
+                ataque += 10
+                print("Você comprou a Espada Grande!")
+            elif compra == '2' and moedas >= 300:
+                moedas -= 300
+                ataque += 5
+                print("Você comprou a Espada Pequena!")
+            elif compra == '3' and moedas >= 100:
+                moedas -= 100
+                ataque_distancia += 5
+                print("Você comprou o Arco!")
+            elif compra == '4' and moedas >= 200:
+                moedas -= 200
+                defesa += 10
+                print("Você comprou o Escudo Grande!")
+            elif compra == '5' and moedas >= 100:
+                moedas -= 100
+                defesa += 5
+                print("Você comprou o Escudo Pequeno!")
+            elif compra == '6':
+                break
+            else:
+                print("Opção inválida ou moedas insuficientes!")
             
-            if escolha == '1' and moedas == 0:
-                print("\nVocê não possuí moedas o suficiente.")
-                input("Clique em qualquer tecla para sair da loja...")
-
-            os.system("cls")          
-        print(f"O aventureiro {nome} seguiu seu caminho rumo ao interior do castelo.")
-        input("\nClique em qualquer tecla para continuar sua aventura...")
-        os.system("cls")
-
     else:
-        print("O velho aponta a espada antiga em sua direção e o ameaça: \n-- Então de o fora daqui, pois você tera que prestar contas com minha espada afiada, JOVEM TOLO!!!")
-        print(f"O aventureiro {nome} deu as costas ao senhor e seguiu seu caminho rumo ao interior do castelo.")
-        input("\nClique em qualquer tecla para continuar sua aventura...")
-        os.system("cls")
+        print("O velho te expulsa do castelo!")
+        input("Pressione Enter para continuar...")
 
 else:
-    sorte = random.randint(0, 3)
-    print(f"Caminhando pelo Pântano Sombrio, o aventureiro {nome} se deparou com um baú misterioso a sua frente:")
-    escolha = input("[1] Abrir o Baú Misterioso.\n[2] Seguir em Frente.\nResposta: ")
-    os.system("cls")
-
+    print("No pântano, você encontra um baú misterioso!")
+    escolha = input("[1] Abrir\n[2] Ignorar\nResposta: ")
     if escolha == '1':
+        print("Você encontrou equipamentos!")
+        ataque += 5
+        defesa += 5
+    input("Pressione Enter para continuar...")
+    os.system("cls")
+    
+print("Voce caminha por um caminho escuro e ouve um barulho estrondeante, parece uma mistura de trovao com rugido!")
+input("Pressione Enter para continuar...")
 
-        match sorte:
-            case 0:
-                print(f"O aventureiro {nome} abriu o baú e se deparou com um baú completamente vazio.")
+# Combate contra o Boss
+print("Um monstro gigante aparece!")
+print("                         ^                       ^   ") 
+print("                         |\   \        /        /|   ")
+print("                        /  \  |\__  __/|       /  \  ")
+print("                       / /\ \ \ _ \/ _ /      /    \ ")
+print("                      /  / \ \ {*}\/{*}      /  / \ \    ")
+print("                      | | | \ \( (00) )     /  // |\ \   ")
+print("                      | | | |\ \(V""V)\    /  / | || \|  ")
+print("                      | | | | \ |^--^| \  /  / || || ||  ")
+print("                     / / /  | |( WWWW__ \/  /| || || ||  ")
+print("                    | | | | | |  \______\  / / || || || ")
+print("                    | | | / | | )|______\ ) | / | || ||  ")
+print("                    / / /  / /  /______/   /| \ \ || ||  ")
+print("                   / / /  / /  /\_____/  |/ /__\ \ \ \ \ ")
+print("                   | | | / /  /\______/    \   \__| \ \ \ ")
+print("                   | | | | | |\______ __    \_    \__|_| \ ")
+print("                   | | ,___ /\______ _  _     \_       \  |  ")
+print("                   | |/    /\_____  /    \      \__     \ |    /\ ")
+print("                   |/ |   |\______ |      |        \___  \ |__/  \ ")
+print("                   v  |   |\______ |      |            \___/     | ")
+print("                      |   |\______ |      |                    __/ ")
+print("                       \   \________\_    _\               ____/  ")
+print("                     __/   /\_____ __/   /   )\_,      _____/    ")
+print("                    /  ___/  \ uuuu /  ___/___)    \______/    ")
+print("                    VVV  V        VVV  V     ")
 
-            case 1:
-                ataque += 5
-                ataque_distancia += 5
-                defesa += 5
-                print(f"O aventureiro {nome} abriu o baú e se deparou com vários equipamentos:")
-                print("Espada Pequena (5 de Ataque)")
-                print("Escudo Pequeno (5 de Defesa)")
-                print("Arco e Flecha (5 de Ataque à Distancia)")
-                print("Você pegou os itens e os equipou..")
 
-            case 2:
-                ataque += 10
-                defesa += 5
-                print(f"O aventureiro {nome} abriu o baú e se deparou com vários equipamentos:")
-                print("Espada Grande (10 de Ataque)")
-                print("Escudo Pequeno (5 de Defesa)")
-                print("Você pegou os itens e os equipou..")
+print(f"\nVocê está pronto para enfrentar o Boss! {nome} está com {vida_guerreiro} de vida e {ataque} adicional de ataque.")
 
-            case 3:
-                ataque_distancia += 5
-                defesa += 20 
-                print(f"O aventureiro {nome} abriu o baú e se deparou com vários equipamentos:")
-                print("Escudo Colossal (20 de Defesa)")
-                print("Arco e Flecha (5 de Ataque à Distancia)")
-                print("Você pegou os itens e os equipou..")
+input("Pressione Enter para continuar...")
 
-            case _:
-                print("\nOpção Invalida.")
-
-        print(f"\nO aventureiro {nome} deu as costas ao baú aberto e seguiu seu caminho rumo ao interior do pântano.")
-        input("\nClique em qualquer tecla para continuar sua aventura...")
-        os.system("cls")
-        
+os.system("cls")    
+while vida_boss > 0 and vida_guerreiro > 0:
+    # Turno do jogador
+    os.system("cls")
+    print(f"Vida do Boss: {vida_boss}")
+    print(f"Sua Vida: {vida_guerreiro}")
+    print("\nOpções:")
+    print("[1] Atacar")
+    if usos_cura > 0: print("[2] Curar")
+    if usos_magia > 0: print("[3] Magia")
+    
+    acao = input("Escolha: ")
+    
+    # Ação do jogador
+    if acao == '1':
+        dano = 15 + int(ataque)
+        vida_boss -= dano
+        print(f"Você causou {dano} de dano!")
+    elif acao == '2' and usos_cura > 0:
+        vida_guerreiro = min(100, vida_guerreiro + 30)
+        usos_cura -= 1
+        print("Você se curou!")
+    elif acao == '3' and usos_magia > 0:
+        dano_magia = 30  # Dano fixo
+        vida_boss -= dano_magia
+        usos_magia -= 1
+        print(f"Magia poderosa! Causou {dano_magia} de dano!")
     else:
-        print(f"O aventureiro {nome} deu as costas ao baú e seguiu seu caminho rumo ao interior do pântano.")
-        input("\nClique em qualquer tecla para continuar sua aventura...")
-        os.system("cls")
+        print("Ação inválida!")
+    
+    input("Pressione Enter...")
+    
+    # Turno do Boss
+    if vida_boss > 0:
+        dano_boss = 20  
+        vida_guerreiro -= dano_boss
+        print(f"O Boss te atacou causando {dano_boss} de dano!")
+        input("Pressione Enter...")
 
-print (f"O aventureiro {nome} encontra o chefão.")
+# Resultado final
+os.system("cls")
+if vida_guerreiro <= 0:
+    print("""
+  ____    _    __  __ _____    _____     _______ ____   
+ / ___|  / \  |  \/  | ____|  / _ \ \   / / ____|  _ \  
+| |  _  / _ \ | |\/| |  _|   | | | \ \ V /|  _| | |_) | 
+| |_| |/ ___ \| |  | | |___  | |_| | | | | |___|  _ <  
+ \____/_/   \_\_|  |_|_____|  \___/  |_| |_____|_| \_\  
+""")
+else:
+    print("""
+    ___________   
+   '._==_==_=_.'   
+   .-\\:      /-.   
+  | (|:.     |) |  
+   '-|:.     |-'    
+     \\::.    /     
+      '::. .'       
+        ) (        
+      _.' '._      
+     `\"\"\"\"\"\"\"`     
+VOCÊ DERROTOU O MONSTRO!""")
+
+print("Obrigado por jogar!")
